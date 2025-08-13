@@ -1,3 +1,11 @@
-SELECT sc.product_id, SUM(sc.quantity) AS total_quantity
+SELECT 
+    sc.product_id,
+    p.name AS product_name,
+    sc.quantity,
+    i.customer_email
 FROM shopping_cart sc
-GROUP BY sc.product_id;
+JOIN products p ON sc.product_id = p.id
+JOIN invoices i ON sc.invoice_id = i.id
+WHERE sc.product_id = 7;
+
+
