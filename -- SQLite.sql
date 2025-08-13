@@ -1,7 +1,7 @@
 -- SQLite
 CREATE TABLE products (
     id integer(10) PRIMARY KEY AUTOINCREMENT ,
-    code char(255) NOT NULL UNIQUE,
+    code varchar(255) NOT NULL UNIQUE,
     name varchar(255) NOT NULL,
     price integer(10) NOT NULL,
     entry_date date NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE invoices (
     id integer(10) PRIMARY KEY AUTOINCREMENT ,
     invoice_number varchar(255) NOT NULL UNIQUE,
     invoice_date date NOT NULL,
-    customer_email varchar(255) NOT NULL UNIQUE,
+    customer_email varchar(255) NOT NULL,
     total_amount float(10) NOT NULL
 );
 

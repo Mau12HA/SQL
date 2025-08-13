@@ -35,3 +35,4 @@ CREATE TABLE products_invoices (
     FOREIGN KEY (product_id) REFERENCES products(id),
     FOREIGN KEY (invoice_id) REFERENCES invoices(id)
 );
+
