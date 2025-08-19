@@ -12,32 +12,38 @@ WHERE price > 50000;
 -- c Obtenga todas las compras de un mismo producto por id.
 
 SELECT 
-    pi.product_id,
+    sc.product_id,
     p.name AS product_name,
-    pi.quantity,
-    pi.total,
+    sc.quantity,
+    (sc.quantity * p.price) AS total,
     i.customer_email,
     i.invoice_date
-FROM products_invoices pi
+FROM shopping_cart sc
 JOIN products p 
-    ON pi.product_id = p.id
+    ON sc.product_id = p.id
 JOIN invoices i
-    ON pi.invoice_id = i.id
-WHERE pi.product_id = 2;
+    ON sc.invoice_id = i.id
+WHERE sc.product_id = 7;
 
 -- d Obtenga todas las compras agrupadas por producto, donde se muestre 
 --   el total comprado entre todas las compras.
 
-SELECT 
-    pi.product_id,
-    p.name AS product_name,
-    p.price,
-    SUM(pi.quantity) AS total_quantity,
-    SUM(pi.total) AS total_spent
-FROM products_invoices pi
-JOIN products p 
-    ON pi.product_id = p.id
-GROUP BY pi.product_id, p.name;
+SELECT product_id,
+     p.name AS product_name,
+     sc.quantity,
+     p.price,
+        (sc.quantity * p.price) AS total_price
+FROM shopping_cart sc
+JOIN products p ON sc.product_id = p.id
+GROUP BY product_id;
+
+--SELECT 
+--    p.name AS product_name,
+--    pi.product_id,
+--    SUM(pi.quantity) AS total_comprado
+--FROM products_invoices pi
+--JOIN products p ON pi.product_id = p.id
+--GROUP BY pi.product_id, p.name;
 
 
 -- e Obtenga todas las facturas realizadas por el mismo comprador
